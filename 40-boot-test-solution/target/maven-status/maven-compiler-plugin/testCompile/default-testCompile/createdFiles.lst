@@ -1,0 +1,4 @@
+accounts\client\AccountWebTestClientTests.class
+accounts\client\AccountClientTests.class
+accounts\web\AccountControllerBootTests.class
+accounts\web\AccountControllerTests.class

@@ -1,0 +1,16 @@
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\StubRestaurantRepository.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\LoggingAspectTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\aspects\RepositoryPerformanceLogTest.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\StubAccountRepository.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\DbExceptionTestConfig.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\account\JdbcAccountRepositoryTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\DBExceptionHandlingAspectTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\SystemTestConfig.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\account\AccountTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\RewardNetworkImplTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\CaptureSystemOutput.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\RewardNetworkTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\reward\JdbcRewardRepositoryTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\StubRewardRepository.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\restaurant\JdbcRestaurantRepositoryTests.java
+C:\GitHub\core-spring-labfiles\lab\22-aop-solution\src\test\java\rewards\internal\restaurant\RestaurantTests.java
