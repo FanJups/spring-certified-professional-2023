@@ -1,12 +1,22 @@
 package config;
 
 import org.assertj.core.api.Fail;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import rewards.RewardNetwork;
+import rewards.internal.RewardNetworkImpl;
+import rewards.internal.account.AccountRepository;
+import rewards.internal.account.JdbcAccountRepository;
+import rewards.internal.restaurant.JdbcRestaurantRepository;
+import rewards.internal.restaurant.RestaurantRepository;
+import rewards.internal.reward.JdbcRewardRepository;
+import rewards.internal.reward.RewardRepository;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit test the Spring configuration class to ensure it is creating the right
@@ -23,7 +33,7 @@ public class RewardsConfigTests {
 	// - Fix RewardsConfig if necessary.
 	// - Now run the test, it should pass.
 
-	/*
+
 	private RewardsConfig rewardsConfig = new RewardsConfig(dataSource);
 
 	@Test
@@ -43,7 +53,7 @@ public class RewardsConfigTests {
 		assertTrue(rewardsRepository instanceof JdbcRewardRepository);
 		checkDataSource(rewardsRepository);
 	}
-	*/
+
 
 	/**
 	 * Ensure the data-source is set for the repository. Uses reflection as we do
