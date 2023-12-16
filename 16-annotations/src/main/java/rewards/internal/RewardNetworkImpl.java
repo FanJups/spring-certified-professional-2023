@@ -1,5 +1,6 @@
 package rewards.internal;
 
+import org.springframework.stereotype.Service;
 import rewards.AccountContribution;
 import rewards.Dining;
 import rewards.RewardConfirmation;
@@ -31,6 +32,7 @@ import common.money.MonetaryAmount;
  *   injection or constructor injection.
  */
 
+@Service
 public class RewardNetworkImpl implements RewardNetwork {
 
 	private AccountRepository accountRepository;
