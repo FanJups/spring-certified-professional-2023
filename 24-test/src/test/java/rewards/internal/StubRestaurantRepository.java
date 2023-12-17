@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import org.springframework.stereotype.Repository;
 import rewards.internal.restaurant.Restaurant;
 import rewards.internal.restaurant.RestaurantRepository;
 
@@ -22,6 +24,8 @@ import common.money.Percentage;
  * dependencies such as a Database. Simple unit tests can then verify object
  * behavior by considering the state of this stub.
  */
+@Profile("stub")
+@Repository
 public class StubRestaurantRepository implements RestaurantRepository {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
