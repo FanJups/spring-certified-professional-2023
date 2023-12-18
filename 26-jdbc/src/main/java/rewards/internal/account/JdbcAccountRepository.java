@@ -3,6 +3,7 @@ package rewards.internal.account;
 import common.money.MonetaryAmount;
 import common.money.Percentage;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -28,9 +29,12 @@ import java.sql.SQLException;
 public class JdbcAccountRepository implements AccountRepository {
 
 	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
-	public JdbcAccountRepository(DataSource dataSource) {
+	public JdbcAccountRepository(JdbcTemplate jdbcTemplate) {
+
 		this.dataSource = dataSource;
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	// TODO-07 (Optional): Refactor this method using JdbcTemplate and ResultSetExtractor
@@ -46,43 +50,8 @@ public class JdbcAccountRepository implements AccountRepository {
 			"left outer join T_ACCOUNT_BENEFICIARY b " +
 			"on a.ID = b.ACCOUNT_ID " +
 			"where c.ACCOUNT_ID = a.ID and c.NUMBER = ?";
-		
-		Account account = null;
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, creditCardNumber);
-			rs = ps.executeQuery();
-			account = mapAccount(rs);
-		} catch (SQLException e) {
-			throw new RuntimeException("SQL exception occurred finding by credit card number", e);
-		} finally {
-			if (rs != null) {
-				try {
-					// Close to prevent database cursor exhaustion
-					rs.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (ps != null) {
-				try {
-					// Close to prevent database cursor exhaustion
-					ps.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (conn != null) {
-				try {
-					// Close to prevent database connection exhaustion
-					conn.close();
-				} catch (SQLException ex) {
-				}
-			}
-		}
-		return account;
+
+		return jdbcTemplate.query(sql,this::mapAccount,creditCardNumber);
 	}
 
 	// TODO-06: Refactor this method to use JdbcTemplate.
@@ -92,35 +61,10 @@ public class JdbcAccountRepository implements AccountRepository {
 	// - Rerun the JdbcAccountRepositoryTests and verify it passes
 	public void updateBeneficiaries(Account account) {
 		String sql = "update T_ACCOUNT_BENEFICIARY SET SAVINGS = ? where ACCOUNT_ID = ? and NAME = ?";
-		Connection conn = null;
-		PreparedStatement ps = null;
-		try {
-			conn = dataSource.getConnection();
-			ps = conn.prepareStatement(sql);
-			for (Beneficiary beneficiary : account.getBeneficiaries()) {
-				ps.setBigDecimal(1, beneficiary.getSavings().asBigDecimal());
-				ps.setLong(2, account.getEntityId());
-				ps.setString(3, beneficiary.getName());
-				ps.executeUpdate();
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("SQL exception occurred updating beneficiary savings", e);
-		} finally {
-			if (ps != null) {
-				try {
-					// Close to prevent database cursor exhaustion
-					ps.close();
-				} catch (SQLException ex) {
-				}
-			}
-			if (conn != null) {
-				try {
-					// Close to prevent database connection exhaustion
-					conn.close();
-				} catch (SQLException ex) {
-				}
-			}
+		for (Beneficiary beneficiary : account.getBeneficiaries()) {
+			jdbcTemplate.update(sql,beneficiary.getSavings().asBigDecimal(),account.getEntityId(),beneficiary.getName());
 		}
+
 	}
 
 	/**
