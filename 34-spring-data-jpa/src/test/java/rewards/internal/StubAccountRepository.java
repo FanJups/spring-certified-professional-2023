@@ -29,7 +29,7 @@ public class StubAccountRepository implements AccountRepository {
 		accountsByCreditCard.put("1234123412341234", account);
 	}
 
-	public Account findByCreditCard(String creditCardNumber) {
+	public Account findByCreditCardNumber(String creditCardNumber) {
 		Account account = accountsByCreditCard.get(creditCardNumber);
 		if (account == null) {
 			throw new ObjectRetrievalFailureException(Account.class, creditCardNumber);
