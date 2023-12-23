@@ -1,8 +1,10 @@
 package accounts;
 
+import config.RestSecurityConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Import;
 
 // TODO-00: In this lab, you are going to exercise the following:
 // - Observing the default security behavior
@@ -38,7 +40,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @SpringBootApplication
 //TODO-03: Import security configuration class
 //- Uncomment the line below and go to RestSecurityConfig class
-//@Import(RestSecurityConfig.class)
+@Import(RestSecurityConfig.class)
 @EntityScan("rewards.internal")
 public class RestWsApplication {
 

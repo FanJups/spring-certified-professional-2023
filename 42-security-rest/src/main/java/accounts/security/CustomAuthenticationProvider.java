@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.stereotype.Component;
 
 //TODO-17 (Optional): Create custom AuthenticationProvider
 //- Note that it needs to implement AuthenticationProvider interface
@@ -16,22 +17,23 @@ import org.springframework.security.core.authority.AuthorityUtils;
 //TODO-18a (Optional): Add authentication based upon the custom AuthenticationProvider
 //- Annotate the class with @Component to make it a Spring manager bean
 
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-//	    String username = authentication.getName();
-//	    String password = authentication.getCredentials().toString();
-//
-//	    if (!checkCustomAuthenticationSystem(username, password)) {
-//	    	throw new BadCredentialsException("Bad credentials provided");
-//	    }
-//	      
-//	    return new UsernamePasswordAuthenticationToken(
-//	              username, password, AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+	    String username = authentication.getName();
+	    String password = authentication.getCredentials().toString();
 
-		return null; // remove this line
+	    if (!checkCustomAuthenticationSystem(username, password)) {
+	    	throw new BadCredentialsException("Bad credentials provided");
+	    }
+
+	    return new UsernamePasswordAuthenticationToken(
+	              username, password, AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+
+
 	}
 
 	@Override
